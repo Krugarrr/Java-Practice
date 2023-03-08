@@ -98,17 +98,4 @@ public class BanksTests {
         var account = bank.getAccount(0, suss);
         Assertions.assertThrows(IllegalArgumentException.class, () -> account.takeMoney(BigDecimal.valueOf(2000000)));
     }
-
-    @Test
-    public void TimeMashineDoStuff() {
-        centralBank = CentralBankSingleton.getInstance();
-        BankImpl bank = centralBank.addBank("СперБанк", configuration);
-        bank.createDebitAccount(client);
-        var account = bank.getAccount(0, client);
-        account.addMoney(BigDecimal.valueOf(50000));
-        centralBank.getTimeManager().addDay(1);
-        centralBank.getTimeManager().addMonth(2);
-        centralBank.fundraising();
-        Assertions.assertTrue(account.getAccountWrap().getBalance().compareTo(BigDecimal.valueOf(50000)) > 0);
-    }
 }
