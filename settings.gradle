@@ -1,0 +1,5 @@
+rootProject.name = 'Krugarrr'
+include 'lab-1:banks'
+include 'lab-1:banks-console'
+
+
