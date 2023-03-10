@@ -1,5 +1,9 @@
 rootProject.name = 'Krugarrr'
 include 'lab-1:banks'
 include 'lab-1:banks-console'
-
+include 'lab-2:dal'
+include 'lab-2:controller'
+include 'lab-2:service'
+include 'lab-2:service'
+findProject(':lab-2:service')?.name = 'service'
 
