@@ -1,11 +1,8 @@
 package gigachad.pussy.controllers;
 
 import gigachad.pussy.dto.OwnerDto;
-import gigachad.pussy.dto.PussyDto;
 import gigachad.pussy.mapping.OwnerMapping;
-import gigachad.pussy.mapping.PussyMapping;
 import gigachad.pussy.models.Owner;
-import gigachad.pussy.models.Pussy;
 import gigachad.pussy.services.OwnerService;
 import gigachad.pussy.services.OwnerServiceImpl;
 
