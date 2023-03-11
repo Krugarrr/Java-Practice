@@ -1,8 +1,11 @@
 package gigachad.pussy.controllers;
 
 import gigachad.pussy.dto.OwnerDto;
+import gigachad.pussy.dto.PussyDto;
 import gigachad.pussy.mapping.OwnerMapping;
+import gigachad.pussy.mapping.PussyMapping;
 import gigachad.pussy.models.Owner;
+import gigachad.pussy.models.Pussy;
 import gigachad.pussy.services.OwnerService;
 import gigachad.pussy.services.OwnerServiceImpl;
 
@@ -16,7 +19,7 @@ public class OwnerController {
         List<Owner> owners = ownerService.allOwners();
 
         for (Owner owner : owners) {
-            ownerDto.add(new OwnerDto(owner.getName(), owner.getBirthDate()));
+            ownerDto.add(new OwnerDto(owner.getId(), owner.getName(), owner.getBirthDate()));
         }
         return ownerDto;
     }
@@ -33,8 +36,15 @@ public class OwnerController {
         Owner owner = OwnerMapping.OwnerMappingDto(ownerDto);
         ownerService.change(owner);
     }
-    public OwnerDto getById(int id) {
+    public OwnerDto getById(long id) {
         Owner owner = ownerService.getById(id);
-        return new OwnerDto(owner.getName(), owner.getBirthDate());
+        return new OwnerDto(owner.getId(), owner.getName(), owner.getBirthDate());
+    }
+
+    public void addPussy(PussyDto pussyDto, OwnerDto ownerDto) {
+        Pussy pussy = PussyMapping.PussyMappingDto(pussyDto);
+        Owner owner = OwnerMapping.OwnerMappingDto(ownerDto);
+        owner.getPussies().add(pussy);
+        ownerService.change(owner);
     }
 }

@@ -3,7 +3,6 @@ package gigachad.pussy.models;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.joda.time.MutableDateTime;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +25,9 @@ public class Pussy {
     private List<Pussy> friends;
     public Pussy() {
     }
-    public Pussy(String name, MutableDateTime birthDate, Breed breed, Color color) {
+    public Pussy(long number, String name, MutableDateTime birthDate, Breed breed, Color color) {
         friends = new ArrayList<Pussy>();
+        this.number = number;
         this.name = name;
         this.birthDate = birthDate;
         this.breed = breed;

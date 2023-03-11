@@ -20,8 +20,9 @@ public class Owner {
     private List<Pussy> pussies;
     public Owner() {
     }
-    public Owner(String name, MutableDateTime birthDate) {
+    public Owner(long id, String name, MutableDateTime birthDate) {
         pussies = new ArrayList<Pussy>();
+        this.id = id;
         this.name = name;
         this.birthDate = birthDate;
     }

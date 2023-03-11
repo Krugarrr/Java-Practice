@@ -5,6 +5,6 @@ import gigachad.pussy.models.Pussy;
 
 public class PussyMapping {
     public static Pussy PussyMappingDto (PussyDto pussyDto) {
-        return new Pussy(pussyDto.getName(), pussyDto.getBirthDate(), pussyDto.getBreed(), pussyDto.getColor());
+        return new Pussy(pussyDto.getNumber(), pussyDto.getName(), pussyDto.getBirthDate(), pussyDto.getBreed(), pussyDto.getColor());
     }
 }

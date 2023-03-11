@@ -1,6 +1,8 @@
 package gigachad.pussy.services;
 
 import gigachad.pussy.models.Owner;
+import gigachad.pussy.models.Pussy;
+
 import java.util.List;
 
 public interface OwnerService {
@@ -8,5 +10,6 @@ public interface OwnerService {
     void add(Owner owner);
     void delete(Owner owner);
     void change(Owner owner);
-    Owner getById(int id);
+    Owner getById(long id);
+    void addPussy(Pussy pussy, Owner owner);
 }

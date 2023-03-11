@@ -42,7 +42,13 @@ public class OwnerDaoImpl implements OwnerDao {
     }
 
     @Override
-    public Owner getById(int id) {
+    public Owner getById(long id) {
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Owner.class, id);
+    }
+
+    @Override
+    public void addPussy(Pussy pussy, Owner owner) {
+        owner.getPussies().add(pussy);
+        update(owner);
     }
 }

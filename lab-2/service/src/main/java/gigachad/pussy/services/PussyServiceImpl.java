@@ -2,8 +2,8 @@ package gigachad.pussy.services;
 
 import gigachad.pussy.dao.PussyDao;
 import gigachad.pussy.dao.PussyDaoImpl;
+import gigachad.pussy.models.Owner;
 import gigachad.pussy.models.Pussy;
-import gigachad.pussy.services.PussyService;
 
 import java.util.List;
 
@@ -20,8 +20,8 @@ public class PussyServiceImpl implements PussyService {
     }
 
     @Override
-    public void delete(Pussy pussy) {
-        pussyDao.delete(pussy);
+    public void destroyPussy(Pussy pussy) {
+        pussyDao.destroyPussy(pussy);
     }
 
     @Override
@@ -30,7 +30,17 @@ public class PussyServiceImpl implements PussyService {
     }
 
     @Override
-    public Pussy getById(int id) {
+    public Pussy getById(long id) {
         return pussyDao.getById(id);
+    }
+
+    @Override
+    public void setOwner(Pussy pussy, Owner owner) {
+        pussyDao.setOwner(pussy, owner);
+    }
+
+    @Override
+    public void addFriend(Pussy pussy1, Pussy pussy2) {
+        pussyDao.addFriend(pussy1, pussy2);
     }
 }
