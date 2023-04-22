@@ -43,7 +43,7 @@ public class PussyController {
         return ResponseEntity.ok().body(HttpStatus.OK);
     }
 
-    @PostMapping("/change")
+    @PutMapping("/change")
     public ResponseEntity<?> changePussy(@RequestBody PussyDto pussyDto) {
         pussyService.change(pussyDto);
         return ResponseEntity.ok().body(HttpStatus.OK);
