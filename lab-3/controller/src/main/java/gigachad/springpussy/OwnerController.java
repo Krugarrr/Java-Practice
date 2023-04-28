@@ -19,35 +19,35 @@ public class OwnerController {
         this.ownerService = ownerService;
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<?> addOwner(@RequestBody OwnerDto ownerDto) {
         ownerService.add(ownerDto);
         return ResponseEntity.ok().body(HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping
     public ResponseEntity<?> deleteOwner(@RequestBody OwnerDto ownerDto) {
         ownerService.delete(ownerDto);
         return ResponseEntity.ok().body(HttpStatus.OK);
     }
 
-    @PutMapping("/change")
+    @PutMapping
     public ResponseEntity<?> changeOwner(@RequestBody OwnerDto ownerDto) {
         ownerService.change(ownerDto);
         return ResponseEntity.ok().body(HttpStatus.OK);
     }
 
-    @GetMapping("/get/by/id")
-    public ResponseEntity<OwnerDto> getById(@RequestParam long id) throws Exception {
+    @GetMapping("/get/{id}")
+    public ResponseEntity<OwnerDto> getById(@PathVariable long id) throws Exception {
         return ResponseEntity.ok(ownerService.getById(id));
     }
 
-    @GetMapping("/get/all")
+    @GetMapping
     public ResponseEntity<List<OwnerDto>> getOwners() {
         return ResponseEntity.ok(ownerService.allOwners());
     }
 
-    @GetMapping("/get/pussies")
+    @GetMapping("/owned")
     public ResponseEntity<List<PussyDto>> getPussies(@RequestParam long ownerId) {
         return ResponseEntity.ok(ownerService.getPussies(ownerId));
     }
