@@ -21,48 +21,48 @@ public class PussyController {
         this.pussyService = pussyService;
     }
 
-    @GetMapping("/get/all")
+    @GetMapping
     public ResponseEntity<List<PussyDto>> getPussies() {
         return ResponseEntity.ok(pussyService.getAll());
     }
 
-    @GetMapping("/get/pussy/friends")
-    public ResponseEntity<List<PussyDto>> getFriends(@RequestParam long pussyId) {
-        return ResponseEntity.ok(pussyService.getFriends(pussyId));
+    @GetMapping("/{id}/friends")
+    public ResponseEntity<List<PussyDto>> getFriends(@PathVariable long id) {
+        return ResponseEntity.ok(pussyService.getFriends(id));
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<?> addPussy(@RequestBody PussyDto pussyDto) {
         pussyService.add(pussyDto);
         return ResponseEntity.ok().body(HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/destroy")
+    @DeleteMapping
     public ResponseEntity<?> destroyPussy(@RequestBody PussyDto pussyDto) {
         pussyService.destroyPussy(pussyDto);
         return ResponseEntity.ok().body(HttpStatus.OK);
     }
 
-    @PutMapping("/change")
+    @PutMapping
     public ResponseEntity<?> changePussy(@RequestBody PussyDto pussyDto) {
         pussyService.change(pussyDto);
         return ResponseEntity.ok().body(HttpStatus.OK);
     }
 
-    @GetMapping("/get/by/id")
-    public ResponseEntity<PussyDto> findById(@RequestParam long id) throws Exception {
+    @GetMapping("/{id}")
+    public ResponseEntity<PussyDto> findById(@PathVariable long id) throws Exception {
         return ResponseEntity.ok(pussyService.findById(id));
     }
 
-    @PostMapping("/set/owner")
-    public ResponseEntity<?> setOwner(@RequestParam @Nonnull long pussyId, @RequestParam @Nonnull long ownerId) throws Exception {
-        pussyService.setOwner(pussyId, ownerId);
+    @PostMapping("/{id}/owners/")
+    public ResponseEntity<?> setOwner(@PathVariable @Nonnull long id, @RequestParam @Nonnull long ownerId) throws Exception {
+        pussyService.setOwner(id, ownerId);
         return ResponseEntity.ok().body(HttpStatus.OK);
     }
 
-    @PostMapping("/make/friend")
-    public ResponseEntity<?> addFriend(@RequestParam @Nonnull long firstPussyId, @RequestParam @Nonnull long secondPussyId) {
-        pussyService.addFriend(firstPussyId, secondPussyId);
+    @PostMapping("/{id}/befriend")
+    public ResponseEntity<?> addFriend(@PathVariable @Nonnull long id, @RequestParam @Nonnull long secondId) {
+        pussyService.addFriend(id, secondId);
         return ResponseEntity.ok().body(HttpStatus.OK);
     }
 }
