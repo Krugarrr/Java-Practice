@@ -1,16 +1,17 @@
 package gigachad.security;
 
 
-
-import gigachad.security.services.CustomUserDetailService;
 import gigachad.security.jwt.JwtAuthenticationFilter;
+import gigachad.security.services.CustomUserDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,13 +34,22 @@ public class WebSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .formLogin().disable()
                 .securityMatcher("/**")
-                .authorizeHttpRequests(regitstry -> regitstry
-                        .requestMatchers("auth/login").permitAll()
-                        .requestMatchers("/**").permitAll()
-                        .requestMatchers("/auth/secured").hasRole("ADMIN")
-                        .anyRequest().authenticated()
-                );
+                .authorizeHttpRequests()
+                .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/pussies/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/pussies/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/owners/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/owners/**").hasRole("ADMIN")
+                .requestMatchers("/pussies/{id}").permitAll()
+                .requestMatchers("/owners/{id}").permitAll()
+                .requestMatchers("/swagger-ui/**").permitAll()
+                .anyRequest().authenticated();
         return http.build();
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/v3/api-docs/**");
     }
 
     @Bean

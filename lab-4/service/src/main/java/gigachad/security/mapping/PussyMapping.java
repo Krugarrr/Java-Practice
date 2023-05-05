@@ -4,7 +4,6 @@ import gigachad.security.dto.OwnerDto;
 import gigachad.security.dto.PussyDto;
 import gigachad.security.models.Pussy;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

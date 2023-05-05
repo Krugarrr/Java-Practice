@@ -2,8 +2,11 @@ package gigachad.security;
 
 import gigachad.security.dto.PussyDto;
 import gigachad.security.services.PussyService;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import jakarta.annotation.Nonnull;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -13,16 +16,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pussies")
+@RequiredArgsConstructor
 @Validated
+@SecurityScheme(
+        name = "Bearer Authentication",
+        type = SecuritySchemeType.HTTP,
+        bearerFormat = "JWT",
+        scheme = "bearer"
+)
 public class PussyController {
     private final PussyService pussyService;
-
-    @Autowired
-    public PussyController(PussyService pussyService) {
-        this.pussyService = pussyService;
-    }
-
     @GetMapping
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<List<PussyDto>> getPussies() {
         return ResponseEntity.ok(pussyService.getAll());
     }
@@ -33,24 +38,28 @@ public class PussyController {
     }
 
     @PostMapping
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<?> addPussy(@RequestBody PussyDto pussyDto) {
         pussyService.add(pussyDto);
         return ResponseEntity.ok().body(HttpStatus.CREATED);
     }
 
     @DeleteMapping
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<?> destroyPussy(@RequestBody PussyDto pussyDto) {
         pussyService.destroyPussy(pussyDto);
         return ResponseEntity.ok().body(HttpStatus.OK);
     }
 
     @PutMapping
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<?> changePussy(@RequestBody PussyDto pussyDto) {
         pussyService.change(pussyDto);
         return ResponseEntity.ok().body(HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<PussyDto> findById(@PathVariable long id) throws Exception {
         return ResponseEntity.ok(pussyService.findById(id));
     }

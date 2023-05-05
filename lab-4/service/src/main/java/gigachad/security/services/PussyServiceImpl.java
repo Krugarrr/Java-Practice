@@ -7,7 +7,6 @@ import gigachad.security.dto.PussyDto;
 import gigachad.security.mapping.PussyMapping;
 import gigachad.security.models.Pussy;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,10 +1,7 @@
 package gigachad.security.dto;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Builder;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 @Data
 public class UserDto {

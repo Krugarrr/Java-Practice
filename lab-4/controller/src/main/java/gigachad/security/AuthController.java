@@ -1,10 +1,10 @@
 package gigachad.security;
 
 import gigachad.security.dto.UserDto;
-import gigachad.security.services.AuthService;
 import gigachad.security.securities.LoginRequest;
 import gigachad.security.securities.LoginResponse;
 import gigachad.security.securities.UserPrincipal;
+import gigachad.security.services.AuthService;
 import gigachad.security.services.UserService;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -15,8 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,18 +34,15 @@ public class AuthController {
         return ResponseEntity.ok(authService.attemptLogin(request.getEmail(), request.getPassword()));
     }
 
-    @PostMapping()
-    public ResponseEntity<?> create(@RequestBody UserDto user) {
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody UserDto user) {
         userService.addUser(user);
         return ResponseEntity.ok().body(HttpStatus.CREATED);
     }
-    @GetMapping()
-    public ResponseEntity<List<UserDto>> getUsers(){
-        return ResponseEntity.ok(userService.getAll());
-    }
+
     @GetMapping("/secured")
     @SecurityRequirement(name = "Bearer Authentication")
     public String secured(@AuthenticationPrincipal UserPrincipal principal) {
-        return "Xuy" + principal.getEmail() + " " + principal.getUserId();
+        return "Secured as:" + principal.getEmail() + "\n Id: " + principal.getUserId();
     }
 }
