@@ -5,7 +5,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.0'
 }
 
-group 'gigachad.security'
+group 'pussy.protection'
 version '1.0-SNAPSHOT'
 
 repositories {
